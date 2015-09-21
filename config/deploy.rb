@@ -1,5 +1,5 @@
 # config valid only for Capistrano 3.1
- lock '2.5.15'
+ lock '3.4.0'
 
 set :application, 'demo'
 set :repo_url, 'https://github.com/kewaunited/demo.git'
@@ -53,16 +53,16 @@ set :keep_releases, 5
 
 namespace :deploy do
 
-  desc 'Restart application'
-  task :restart do
-    on roles(:app), in: :sequence, wait: 5 do
+  # desc 'Restart application'
+  # task :restart do
+  #  on roles(:app), in: :sequence, wait: 5 do
       # Your restart mechanism here, for example:
-      execute :touch, release_path.join('tmp/restart.txt')
-    end
-  end
+  #    execute :touch, release_path.join('tmp/restart.txt')
+  #  end
+  # end
 
  # after :publishing, :restart
- after :publishing, 'deploy:restart'
+ # after :publishing, 'deploy:restart'
   after :finishing, 'deploy:cleanup'
 
 #  after :restart, :clear_cache do

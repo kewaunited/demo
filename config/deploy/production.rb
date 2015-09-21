@@ -1,7 +1,8 @@
 # Simple Role Syntax
 # ==================
 
-set :stage, :production
+set :stage, :test
+set :branch, 'develop'
 
 # Supports bulk-adding hosts to roles, the primary
 # server in each group is considered to be the first
@@ -17,7 +18,19 @@ role :db,  %w{deploy@123.57.237.245}
 # definition into the server list. The second argument
 # something that quacks like a hash can be used to set
 # extended properties on the server.
-server '123.57.237.245', user: 'deploy', roles: %w{web app}
+server '123.57.237.245', user: 'deploy', roles: %w{web app db}
+
+# dont try and infer something as important as environment from
+# stage name.
+set :rails_env, :test
+
+# number of unicorn workers, this will be reflected in
+# the unicorn.rb and the monit configs
+set :unicorn_worker_count, 5
+
+# whether we're using ssl or not, used for building nginx
+# config file
+set :enable_ssl, false
 
 # you can set custom ssh options
 # it's possible to pass any option but you need to keep in mind that net/ssh understand limited list of options
